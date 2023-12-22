@@ -1,0 +1,41 @@
+version: '3'
+services:
+  mongo:
+    image: mongo
+    container_name: mongo_c
+    volumes:
+      - mongo-data:/data/db
+    ports:
+      - "27017:27017"
+  server:
+    build: ./server
+    container_name: server_c
+    ports:
+      - "5000:5000"
+    depends_on:
+      - mongo
+    volumes:
+      - ./server:/app
+      - /app/node_modules
+    environment:
+      - MONGO_URL=mongodb+srv://smanjesh1854:Manjesh1854@arcticcicada.bmm7nwc.mongodb.net/?retryWrites=true&w=majority
+      - SECRET_KEY='p6e19b83lavrkjt2jcumlea81fnh3uhepkxp10temr48hncew'
+      - PORT=5000
+  client:
+    build: ./client
+    container_name: client_c
+    ports:
+      - "8000:8000"
+    stdin_open: true
+    tty: true
+    depends_on:
+      - server
+    volumes:
+      - ./client:/app
+      - /app/node_modules
+    environment:
+      - SERVER_URL=http://localhost:5000/
+volumes:
+  mongo-data:
+    
+  
