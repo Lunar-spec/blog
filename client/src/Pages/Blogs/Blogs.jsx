@@ -16,7 +16,7 @@ const Blogs = () => {
         const fetchBlogs = async () => {
             setLoading(true);
             try {
-                const blogs = await axios.get(`${import.meta.env.SERVER_URL}posts/`);
+                const blogs = await axios.get(`${import.meta.env.VITE_SERVER_URL}posts/`);
                 setBlog(blogs.data);
             } catch (error) {
                 setError({

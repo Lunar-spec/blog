@@ -17,7 +17,7 @@ const EditModal = ({ blogId, onSubmit, onClose }) => {
 
     const fetchData = useCallback(async () => {
         try {
-            const res = await axios.get(`${import.meta.env.SERVER_URL}posts/${blogId}`, {
+            const res = await axios.get(`${import.meta.env.VITE_SERVER_URL}posts/${blogId}`, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }

@@ -18,7 +18,7 @@ const Login = () => {
         setSubmitStatus(true);
         setMessage("Submitting...");
         try {
-            const res = await axios.post(`${import.meta.env.SERVER_URL}users/login`, {
+            const res = await axios.post(`${import.meta.env.VITE_SERVER_URL}users/login`, {
                 email,
                 password,
             });

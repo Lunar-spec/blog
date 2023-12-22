@@ -14,7 +14,7 @@ const Blog = () => {
         const fetchData = async () => {
             setLoading(true)
             try {
-                const res = await axios.get(`${import.meta.env.SERVER_URL}posts/${params.id}`);
+                const res = await axios.get(`${import.meta.env.VITE_SERVER_URL}posts/${params.id}`);
                 setBlog(res.data);
                 if (res.data === null) {
                     navigate('/notfound')

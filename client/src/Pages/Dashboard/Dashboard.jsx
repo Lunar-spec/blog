@@ -29,7 +29,7 @@ const Dashboard = () => {
     const fetchData = useCallback(async () => {
         setLoading(true)
         try {
-            const res = await axios.get(`${import.meta.env.SERVER_URL}posts/`, {
+            const res = await axios.get(`${import.meta.env.VITE_SERVER_URL}posts/`, {
                 params: {
                     username: user.name,
                 },
@@ -57,7 +57,7 @@ const Dashboard = () => {
     const handleUpdate = async (blog) => {
         setLoading(true)
         try {
-            await axios.put(`${import.meta.env.SERVER_URL}posts/update/${editId}`, blog, {
+            await axios.put(`${import.meta.env.VITE_SERVER_URL}posts/update/${editId}`, blog, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
@@ -86,7 +86,7 @@ const Dashboard = () => {
     const handleDelete = async () => {
         setLoading(true)
         try {
-            await axios.delete(`${import.meta.env.SERVER_URL}posts/${deleteId}`, {
+            await axios.delete(`${import.meta.env.VITE_SERVER_URL}posts/${deleteId}`, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
@@ -111,7 +111,7 @@ const Dashboard = () => {
         setLoading(true)
         try {
             await axios.post(
-                `${import.meta.env.SERVER_URL}posts/add/`,
+                `${import.meta.env.VITE_SERVER_URL}posts/add/`,
                 {
                     ...newPost,
                     username: user.name,
