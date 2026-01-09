@@ -11,10 +11,29 @@ const router = express.Router();
 router.get("/", async (req, res) => {
     try {
         const username = req.query.username;
-        const allPosts = await Post.find(username && { username });
+        const allPosts = await Post.find(username && { username }).sort({ createdAt: -1 });
         return res.status(201).json(allPosts)
     } catch (error) {
         res.status(500).json({ error: 'Something went wrong' })
+    }
+});
+
+router.get("/search/title", async (req, res) => {
+    try {
+        const searchQuery = req.query.q;
+
+        if (!searchQuery) {
+            return res.status(400).json({ error: 'Search query is required' });
+        }
+
+        // Case-insensitive search using regex
+        const posts = await Post.find({
+            title: { $regex: searchQuery, $options: 'i' }
+        }).sort({ createdAt: -1 });
+
+        return res.status(200).json(posts);
+    } catch (error) {
+        res.status(500).json({ error: 'Error searching posts' })
     }
 });
 
